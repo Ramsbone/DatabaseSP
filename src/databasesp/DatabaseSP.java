@@ -21,7 +21,7 @@ public class DatabaseSP {
         try {
             DataAccessObjectImpl dao = new DataAccessObjectImpl();
 
-
+            dao.getUsers();
 
         } catch (Exception ex) {
             ex.printStackTrace();

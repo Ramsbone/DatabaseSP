@@ -32,7 +32,7 @@ public class DataAccessObjectImplTest {
 //    }
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception{
         dao = new DataAccessObjectImpl();
     }
 
@@ -109,7 +109,7 @@ public class DataAccessObjectImplTest {
     public void testGetAllUsers() {
         User user;
 
-        ArrayList<User> users = dao.getTeamMembers(1);
+        ArrayList<User> users = dao.getUsers();
         assertNotNull(users);
         assertFalse(users.isEmpty());
         assertEquals(users.size(), 8);

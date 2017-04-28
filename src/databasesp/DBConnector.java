@@ -7,6 +7,7 @@ package databasesp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -16,11 +17,11 @@ public class DBConnector {
 	private Connection connection = null;
 	
 	//Constants
-	private static final String IP          = "localhost";
+	private static final String IP	= "localhost";
 	private static final String PORT	= "3306";
 	private static final String DATABASE	= "teams_and_users";
 	private static final String USERNAME	= "root";
-	private static final String PASSWORD	= "Akeelah1971>";      	
+	private static final String PASSWORD	= "Akeelah1971";      	
 	
 	public DBConnector() throws Exception {
   		Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -32,4 +33,6 @@ public class DBConnector {
   		return this.connection;
 	}
 }
+
+
 
