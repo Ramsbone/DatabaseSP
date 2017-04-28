@@ -5,6 +5,8 @@
  */
 package databasesp;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author GertLehmann
@@ -15,7 +17,16 @@ public class DatabaseSP {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+        try {
+            DataAccessObjectImpl dao = new DataAccessObjectImpl();
+
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
 }
