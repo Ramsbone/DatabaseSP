@@ -14,24 +14,24 @@ import java.util.ArrayList;
 public class Team {
     
     private String name;
-    private ArrayList<User> users;
+    private ArrayList<User> members;
 
     public Team(String name, ArrayList<User> users) {
         this.name = name;
-        this.users = users;
+        this.members = members;
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
+    public ArrayList<User> getMembers() {
+        return members;
     }
 
     @Override
     public String toString() {
-        return "Team{" + "name=" + name + ", users=" + users + '}';
+        return "Team{" + "name=" + name + ", users=" + members + '}';
     }
     
     
