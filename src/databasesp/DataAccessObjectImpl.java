@@ -28,23 +28,67 @@ public class DataAccessObjectImpl implements DataAccessObject {
     // Team
     @Override
     public ArrayList<User> getTeamMembers(int team_id) {
-        ArrayList<User> teamMembers = null;
-
-
+        ArrayList<User> teamMembers = new ArrayList<User>();
+        User user = null;
+        try {
+        Statement stmt = conn.getConnection().createStatement();
+        String sql = "select * from user where user_id in ( select user_id from team_member where team_id = "+ team_id +")";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                user = null;
+                int id = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                int admin = rs.getInt("admin");
+                user = new User(id, username, password, admin);
+                teamMembers.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return teamMembers;
     }
 
     @Override
     public ArrayList<Team> getTeams() {
-        ArrayList<Team> teams = null;
-
+        ArrayList<Team> teams = new ArrayList<Team>();
+        Team team;       
+        try {
+        Statement stmt = conn.getConnection().createStatement();
+        String sql = "select * from team";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                team = null;
+                ArrayList<User> users = new ArrayList<User>();
+                int id = rs.getInt("team_id");
+                String teamname = rs.getString("teamname");
+                users = getTeamMembers(id);
+                team = new Team(teamname, users );
+                teams.add(team);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return teams;
     }
 
     @Override
     public Team getTeam(int team_id) {
         Team team = null;
-
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+        Statement stmt = conn.getConnection().createStatement();
+        String sql = "select * from team where team_id = " + team_id;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                int id = rs.getInt("team_id");
+                String teamname = rs.getString("teamname");
+                users = getTeamMembers(id);
+                team = new Team(teamname, users );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return team;
     }
 
@@ -64,7 +108,6 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 String password = rs.getString("password");
                 int admin = rs.getInt("admin");
                 user = new User(id, username, password, admin);
-                System.out.println(user.toString());
                 users.add(user);
             }
         } catch (SQLException ex) {

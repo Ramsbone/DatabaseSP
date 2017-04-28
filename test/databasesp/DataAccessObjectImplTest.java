@@ -79,7 +79,7 @@ public class DataAccessObjectImplTest {
     }
 
     @Test
-    public void testGetAllTeams() throws Exception {
+    public void testGetAllTeams() {
         ArrayList<Team> teams = dao.getTeams();
         assertNotNull(teams);
         assertFalse(teams.isEmpty());
