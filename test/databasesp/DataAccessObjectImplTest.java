@@ -32,7 +32,7 @@ public class DataAccessObjectImplTest {
 //    }
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() {
         dao = new DataAccessObjectImpl();
     }
 

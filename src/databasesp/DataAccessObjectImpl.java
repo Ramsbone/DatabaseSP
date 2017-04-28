@@ -19,10 +19,14 @@ import java.util.logging.Logger;
  */
 public class DataAccessObjectImpl implements DataAccessObject {
 
-    private final DBConnector conn;
+    private DBConnector conn = null;
 
-    public DataAccessObjectImpl() throws Exception {
-        this.conn = new DBConnector();
+    public DataAccessObjectImpl() {
+        try {
+            this.conn = new DBConnector();
+        } catch (Exception ex) {
+            Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Team
@@ -31,8 +35,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
         ArrayList<User> teamMembers = new ArrayList<User>();
         User user = null;
         try {
-        Statement stmt = conn.getConnection().createStatement();
-        String sql = "select * from user where user_id in ( select user_id from team_member where team_id = "+ team_id +")";
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "select * from user where user_id in ( select user_id from team_member where team_id = " + team_id + ")";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 user = null;
@@ -52,10 +56,10 @@ public class DataAccessObjectImpl implements DataAccessObject {
     @Override
     public ArrayList<Team> getTeams() {
         ArrayList<Team> teams = new ArrayList<Team>();
-        Team team;       
+        Team team;
         try {
-        Statement stmt = conn.getConnection().createStatement();
-        String sql = "select * from team";
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "select * from team";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 team = null;
@@ -63,7 +67,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 int id = rs.getInt("team_id");
                 String teamname = rs.getString("teamname");
                 users = getTeamMembers(id);
-                team = new Team(teamname, users );
+                team = new Team(teamname, users);
                 teams.add(team);
             }
         } catch (SQLException ex) {
@@ -77,14 +81,14 @@ public class DataAccessObjectImpl implements DataAccessObject {
         Team team = null;
         ArrayList<User> users = new ArrayList<User>();
         try {
-        Statement stmt = conn.getConnection().createStatement();
-        String sql = "select * from team where team_id = " + team_id;
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "select * from team where team_id = " + team_id;
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int id = rs.getInt("team_id");
                 String teamname = rs.getString("teamname");
                 users = getTeamMembers(id);
-                team = new Team(teamname, users );
+                team = new Team(teamname, users);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,8 +102,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
         ArrayList<User> users = new ArrayList<User>();
         User user = null;
         try {
-        Statement stmt = conn.getConnection().createStatement();
-        String sql = "select * from user";
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "select * from user";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 user = null;
@@ -121,8 +125,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
     public User getUser(int user_id) {
         User user = null;
         try {
-        Statement stmt = conn.getConnection().createStatement();
-        String sql = "select * from user where user_id = " + user_id;
+            Statement stmt = conn.getConnection().createStatement();
+            String sql = "select * from user where user_id = " + user_id;
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int id = rs.getInt("user_id");
