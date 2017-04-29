@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 public class DataAccessObjectImpl implements DataAccessObject {
 
     private DBConnector conn = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
 
     public DataAccessObjectImpl() {
         try {
@@ -35,9 +37,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
         ArrayList<User> teamMembers = new ArrayList<User>();
         User user = null;
         try {
-            Statement stmt = conn.getConnection().createStatement();
+            stmt = conn.getConnection().createStatement();
             String sql = "select * from user where user_id in ( select user_id from team_member where team_id = " + team_id + ")";
-            ResultSet rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 user = null;
                 int id = rs.getInt("user_id");
@@ -58,9 +60,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
         ArrayList<Team> teams = new ArrayList<Team>();
         Team team;
         try {
-            Statement stmt = conn.getConnection().createStatement();
+            stmt = conn.getConnection().createStatement();
             String sql = "select * from team";
-            ResultSet rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 team = null;
                 ArrayList<User> users = new ArrayList<User>();
@@ -81,9 +83,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
         Team team = null;
         ArrayList<User> users = new ArrayList<User>();
         try {
-            Statement stmt = conn.getConnection().createStatement();
+            stmt = conn.getConnection().createStatement();
             String sql = "select * from team where team_id = " + team_id;
-            ResultSet rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int id = rs.getInt("team_id");
                 String teamname = rs.getString("teamname");
@@ -102,9 +104,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
         ArrayList<User> users = new ArrayList<User>();
         User user = null;
         try {
-            Statement stmt = conn.getConnection().createStatement();
+            stmt = conn.getConnection().createStatement();
             String sql = "select * from user";
-            ResultSet rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 user = null;
                 int id = rs.getInt("user_id");
@@ -125,9 +127,9 @@ public class DataAccessObjectImpl implements DataAccessObject {
     public User getUser(int user_id) {
         User user = null;
         try {
-            Statement stmt = conn.getConnection().createStatement();
+            stmt = conn.getConnection().createStatement();
             String sql = "select * from user where user_id = " + user_id;
-            ResultSet rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
@@ -140,5 +142,20 @@ public class DataAccessObjectImpl implements DataAccessObject {
         }
         return user;
     }
+
+    public DBConnector getConn() {
+        return conn;
+    }
+
+    public Statement getStmt() {
+        return stmt;
+    }
+
+    public ResultSet getRs() {
+        return rs;
+    }
+    
+    
+    
 
 }

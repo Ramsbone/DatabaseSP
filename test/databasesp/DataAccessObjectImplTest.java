@@ -6,6 +6,7 @@
 package databasesp;
 
 import java.util.ArrayList;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,7 +23,6 @@ public class DataAccessObjectImplTest {
     }
 
 // Setup
-    
 //    @BeforeClass
 //    public static void setUpClass() {
 //    }
@@ -30,19 +30,14 @@ public class DataAccessObjectImplTest {
 //    @AfterClass
 //    public static void tearDownClass() {
 //    }
-
     @Before
     public void setUp() {
         dao = new DataAccessObjectImpl();
     }
 
-//    @After
-//    public void tearDown() {
-//    }
-
     // Test teams
     @Test
-    public void testGetTeamMembers(){
+    public void testGetTeamMembers() {
         // Positive test
         User user;
 
@@ -71,7 +66,7 @@ public class DataAccessObjectImplTest {
     }
 
     @Test
-    public void testGetTeamMembersInValidTeamID(){
+    public void testGetTeamMembersInValidTeamID() {
         // Negative test
         ArrayList<User> teamMembers = dao.getTeamMembers(99);
         assertNotNull(teamMembers);
@@ -141,12 +136,38 @@ public class DataAccessObjectImplTest {
         assertEquals(user.getPassword(), "5678");
         assertEquals(user.isAdmin(), true);
     }
-    
+
     @Test
     public void testGetUserByInvalidID() {
         // Negative test
         User user = dao.getUser(99);
         assertNull(user);
-        
-    }    
+
+    }
+
+    @After
+    public void tearDown() {
+        if (dao.getRs() != null) {
+            try {
+                dao.getRs().close();
+            } catch (Exception e) {
+                System.out.println("Exception thrown  :" + e);
+            }
+        }
+        if (dao.getStmt() != null) {
+            try {
+                dao.getStmt().close();
+            } catch (Exception e) {
+                System.out.println("Exception thrown  :" + e);
+            }
+        }
+        if (dao.getConn().getConnection() != null) {
+            try {
+                dao.getConn().getConnection().close();
+            } catch (Exception e) {
+                System.out.println("Exception thrown  :" + e);
+            }
+        }
+    }
+
 }
