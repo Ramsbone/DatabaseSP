@@ -6,22 +6,42 @@
 package databasesp;
 
 import java.util.ArrayList;
+import org.junit.BeforeClass;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+
 public class DataAccessObjectImplTest {
 
     private static DataAccessObjectImpl dao;
+    private static String user1, user2, user3, user4, user5, user6;
+    private static String pass1, pass2;
+    
 
     public DataAccessObjectImplTest() {
     }
 
 // Setup
-//    @BeforeClass
-//    public static void setUpClass() {
-//    }
+//
+// Lidt overflødig/'overkill' BeforeClass setup - men for at anvende den.
+    
+    @BeforeClass
+    public static void setUpClass() {
+        
+        user1 = "Mickey Mouse";
+        user2 = "Fedtmule";
+        user3 = "Pluto";
+        user4 = "Anders And";
+        user5 = "George Gearløs";
+        user6 = "Fætter Guf";
+        
+        pass1 = "5678";
+        pass2 = "1234";
+        
+    }
+
 //
 //    @AfterClass
 //    public static void tearDownClass() {
@@ -30,6 +50,11 @@ public class DataAccessObjectImplTest {
     @Before
     public void setUp() {
         dao = new DataAccessObjectImpl();
+    }
+
+    @After
+    public void tearDown() {
+        dao.closeConnection();
     }
 
     // Test teams
@@ -45,20 +70,20 @@ public class DataAccessObjectImplTest {
 
         user = teamMembers.get(0);
         assertEquals(user.getId(), 2);
-        assertEquals(user.getUsername(), "Mickey Mouse");
-        assertEquals(user.getPassword(), "5678");
+        assertEquals(user.getUsername(), user1);
+        assertEquals(user.getPassword(), pass1);
         assertEquals(user.isAdmin(), true);
 
         user = teamMembers.get(1);
         assertEquals(user.getId(), 3);
-        assertEquals(user.getUsername(), "Fedtmule");
-        assertEquals(user.getPassword(), "1234");
+        assertEquals(user.getUsername(), user2);
+        assertEquals(user.getPassword(), pass2);
         assertEquals(user.isAdmin(), false);
 
         user = teamMembers.get(2);
         assertEquals(user.getId(), 7);
-        assertEquals(user.getUsername(), "Pluto");
-        assertEquals(user.getPassword(), "1234");
+        assertEquals(user.getUsername(), user3);
+        assertEquals(user.getPassword(), pass2);
         assertEquals(user.isAdmin(), false);
     }
 
@@ -108,20 +133,20 @@ public class DataAccessObjectImplTest {
 
         user = users.get(0);
         assertEquals(user.getId(), 1);
-        assertEquals(user.getUsername(), "Anders And");
-        assertEquals(user.getPassword(), "1234");
+        assertEquals(user.getUsername(), user4);
+        assertEquals(user.getPassword(), pass2);
         assertEquals(user.isAdmin(), true);
 
         user = users.get(3);
         assertEquals(user.getId(), 4);
-        assertEquals(user.getUsername(), "George Gearløs");
-        assertEquals(user.getPassword(), "1234");
+        assertEquals(user.getUsername(), user5);
+        assertEquals(user.getPassword(), pass2);
         assertEquals(user.isAdmin(), false);
 
         user = users.get(7);
         assertEquals(user.getId(), 8);
-        assertEquals(user.getUsername(), "Fætter Guf");
-        assertEquals(user.getPassword(), "1234");
+        assertEquals(user.getUsername(), user6);
+        assertEquals(user.getPassword(), pass2);
         assertEquals(user.isAdmin(), false);
     }
 
@@ -129,8 +154,8 @@ public class DataAccessObjectImplTest {
     public void testGetUserByID() {
         User user = dao.getUser(2);
         assertEquals(user.getId(), 2);
-        assertEquals(user.getUsername(), "Mickey Mouse");
-        assertEquals(user.getPassword(), "5678");
+        assertEquals(user.getUsername(), user1);
+        assertEquals(user.getPassword(), pass1);
         assertEquals(user.isAdmin(), true);
     }
 
@@ -140,18 +165,6 @@ public class DataAccessObjectImplTest {
         User user = dao.getUser(99);
         assertNull(user);
 
-    }
-    
-    @After
-    public void tearDown() {
-
-        if (dao.getConn().getConnection() != null) {
-            try {
-                dao.closeConnection();
-            } catch (Exception e) {
-                System.out.println("Exception thrown  :" + e);
-            }
-        }
     }
 
 }
