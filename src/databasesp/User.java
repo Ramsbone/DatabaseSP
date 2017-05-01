@@ -12,11 +12,11 @@ public class User {
     private String password;
     boolean admin;
 
-    public User(int id, String username, String password, int admin) {
+    public User(int id, String username, String password, boolean admin) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.admin = (admin == 1) ? true : false;
+        this.admin = admin;
     }
 
     public int getId() {

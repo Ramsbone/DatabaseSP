@@ -41,7 +41,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                int admin = rs.getInt("admin");
+                boolean admin = rs.getBoolean("admin");
                 user = new User(id, username, password, admin);
                 teamMembers.add(user);
             }
@@ -159,7 +159,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                int admin = rs.getInt("admin");
+                boolean admin = rs.getBoolean("admin");
                 user = new User(id, username, password, admin);
                 users.add(user);
             }
@@ -197,7 +197,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                int admin = rs.getInt("admin");
+                boolean admin = rs.getBoolean("admin");
                 user = new User(id, username, password, admin);
             }
         } catch (SQLException ex) {
