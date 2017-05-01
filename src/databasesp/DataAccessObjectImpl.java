@@ -51,6 +51,21 @@ public class DataAccessObjectImpl implements DataAccessObject {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
         }
         return teamMembers;
     }
@@ -74,6 +89,22 @@ public class DataAccessObjectImpl implements DataAccessObject {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
         }
         return teams;
     }
@@ -94,6 +125,21 @@ public class DataAccessObjectImpl implements DataAccessObject {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
         }
         return team;
     }
@@ -118,6 +164,21 @@ public class DataAccessObjectImpl implements DataAccessObject {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
         }
 
         return users;
@@ -139,6 +200,21 @@ public class DataAccessObjectImpl implements DataAccessObject {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Exception thrown  :" + e);
+                }
+            }
         }
         return user;
     }
@@ -147,15 +223,13 @@ public class DataAccessObjectImpl implements DataAccessObject {
         return conn;
     }
 
-    public Statement getStmt() {
-        return stmt;
+    
+    public void closeConnection() {
+        try {
+            conn.getConnection().close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown  :" + e);
+        }
     }
-
-    public ResultSet getRs() {
-        return rs;
-    }
-    
-    
-    
 
 }

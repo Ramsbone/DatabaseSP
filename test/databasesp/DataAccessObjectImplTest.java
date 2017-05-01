@@ -147,23 +147,23 @@ public class DataAccessObjectImplTest {
 
     @After
     public void tearDown() {
-        if (dao.getRs() != null) {
-            try {
-                dao.getRs().close();
-            } catch (Exception e) {
-                System.out.println("Exception thrown  :" + e);
-            }
-        }
-        if (dao.getStmt() != null) {
-            try {
-                dao.getStmt().close();
-            } catch (Exception e) {
-                System.out.println("Exception thrown  :" + e);
-            }
-        }
+//        if (dao.getRs() != null) {
+//            try {
+//                dao.getRs().close();
+//            } catch (Exception e) {
+//                System.out.println("Exception thrown  :" + e);
+//            }
+//        }
+//        if (dao.getStmt() != null) {
+//            try {
+//                dao.getStmt().close();
+//            } catch (Exception e) {
+//                System.out.println("Exception thrown  :" + e);
+//            }
+//        }
         if (dao.getConn().getConnection() != null) {
             try {
-                dao.getConn().getConnection().close();
+                dao.closeConnection();
             } catch (Exception e) {
                 System.out.println("Exception thrown  :" + e);
             }

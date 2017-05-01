@@ -53,29 +53,30 @@ public class DatabaseSP {
                 Connection conn = null;
             in that order.
              */
-        }finally {
-            if (dao.getRs() != null) {
-                try {
-                    dao.getRs().close();
-                } catch (Exception e) {
-                    System.out.println("Exception thrown  :" + e);
-                }
-            }
-            if (dao.getStmt() != null) {
-                try {
-                    dao.getStmt().close();
-                } catch (Exception e) {
-                    System.out.println("Exception thrown  :" + e);
-                }
-            }
+        } finally {
+            
+//            if (dao.getRs() != null) {
+//                try {
+//                    dao.getRs().close();
+//                } catch (Exception e) {
+//                    System.out.println("Exception thrown  :" + e);
+//                }
+//            }
+//            if (dao.getStmt() != null) {
+//                try {
+//                    dao.getStmt().close();
+//                } catch (Exception e) {
+//                    System.out.println("Exception thrown  :" + e);
+//                }
+//            }
             if (dao.getConn().getConnection() != null) {
                 try {
-                    dao.getConn().getConnection().close();
+                    dao.closeConnection();
                 } catch (Exception e) {
                     System.out.println("Exception thrown  :" + e);
                 }
             }
-        }
+       }
         //forbindelsen burde være lukket:
         /*
         try{
