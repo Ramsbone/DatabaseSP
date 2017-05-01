@@ -50,7 +50,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 teamMembers.add(user);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return teamMembers;
     }
@@ -73,7 +73,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 teams.add(team);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return teams;
     }
@@ -93,7 +93,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 team = new Team(teamname, users);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return team;
     }
@@ -117,7 +117,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 users.add(user);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return users;
@@ -138,7 +138,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
                 user = new User(id, username, password, admin);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataAccessObjectImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
