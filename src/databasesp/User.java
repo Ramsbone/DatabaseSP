@@ -5,10 +5,6 @@
  */
 package databasesp;
 
-/**
- *
- * @author GertLehmann
- */
 public class User {
 
     private int id;

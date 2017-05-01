@@ -7,10 +7,6 @@ package databasesp;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author GertLehmann
- */
 public class Team {
     
     private String name;

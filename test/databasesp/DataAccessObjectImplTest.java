@@ -11,10 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author GertLehmann
- */
 public class DataAccessObjectImplTest {
 
     private static DataAccessObjectImpl dao;
@@ -30,6 +26,7 @@ public class DataAccessObjectImplTest {
 //    @AfterClass
 //    public static void tearDownClass() {
 //    }
+    
     @Before
     public void setUp() {
         dao = new DataAccessObjectImpl();
@@ -78,9 +75,9 @@ public class DataAccessObjectImplTest {
         ArrayList<Team> teams = dao.getTeams();
         assertNotNull(teams);
         assertFalse(teams.isEmpty());
-        Team team = teams.get(0);
-        assertEquals(team.getName(), "A");
-        assertEquals(team.getMembers().size(), 3);
+        Team team = teams.get(1);
+        assertEquals(team.getName(), "B");
+        assertEquals(team.getMembers().size(), 5);
     }
 
     @Test
@@ -144,23 +141,10 @@ public class DataAccessObjectImplTest {
         assertNull(user);
 
     }
-
+    
     @After
     public void tearDown() {
-//        if (dao.getRs() != null) {
-//            try {
-//                dao.getRs().close();
-//            } catch (Exception e) {
-//                System.out.println("Exception thrown  :" + e);
-//            }
-//        }
-//        if (dao.getStmt() != null) {
-//            try {
-//                dao.getStmt().close();
-//            } catch (Exception e) {
-//                System.out.println("Exception thrown  :" + e);
-//            }
-//        }
+
         if (dao.getConn().getConnection() != null) {
             try {
                 dao.closeConnection();
